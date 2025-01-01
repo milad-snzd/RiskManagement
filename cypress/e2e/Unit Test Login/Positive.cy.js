@@ -6,7 +6,7 @@ describe(
     viewportWidth: 1440,
   },
   () => {
-    it.only("Log in with the correct username and password", () => {
+    it("Log in with the correct username and password", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
       cy.get(".text-textWhite > .flex > .text-lg").contains(
         "سامانه مدیریت ریسک"
