@@ -21,7 +21,10 @@ describe(
       cy.get(
         '[data-test="98e1eb98-87b2-4112-a3c9-6a23b29c3fea-show-pass-icon"]'
       ).click();
-        cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]').contains('ورود').trigger('mouseover').click();
+      cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]')
+        .contains("ورود")
+        .trigger("mouseover")
+        .click();
     });
   }
 );
