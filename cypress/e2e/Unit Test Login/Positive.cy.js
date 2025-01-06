@@ -163,6 +163,7 @@ describe(
       );
     });
     it("Login after a password reset to ensure the new password works", () => {
+      let randomKey = (Math.random() + 1).toString(36).substring(3);
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
       cy.get(".text-textWhite > .flex > .text-lg").contains(
         "سامانه مدیریت ریسک"
@@ -200,11 +201,11 @@ describe(
         "09393236862"
       );
       cy.get('[data-test="0b6655f3-6408-45b0-80df-393d3396dfad"]').type(
-        "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگ"
+        "و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگ"
       );
       cy.get('[data-test="4261a30a-e7d2-451f-9130-d2026f7299e1"]').click();
-      cy.visit("https://riskmanagement-stage.otcsaba.ir/admin");
       cy.wait(5000);
+      cy.visit("https://riskmanagement-stage.otcsaba.ir/admin");
       cy.get('[data-test="4b3e33a4-1886-421f-9ec2-9f561028043a"]').type(
         "administrator"
       );
@@ -215,16 +216,36 @@ describe(
       cy.get('[data-test="f03797aa-0097-4bee-98c6-ec08a18512ad"]').click();
       cy.get('[aria-rowindex="3"] > [aria-colindex="3"]').rightclick();
       cy.get('[data-test="menu-item-3"]').click();
-      cy.get("input[name=newPassword]").type("Ms0480371261@");
-      cy.get("input[name=confirmNewPassword]").type("Ms0480371261@");
+      cy.get("input[name=newPassword]").type("M@" + randomKey);
+      cy.get("input[name=confirmNewPassword]").type("M@" + randomKey);
       cy.get('[data-test="18919e73-b50f-452b-b659-b8defd4a595b"]').click();
       cy.get('[data-test="07579af0-8fe9-4995-b01b-eb7bca1f1484"]').click();
       cy.get('.ag-row-first > [aria-colindex="7"]').click();
       cy.get('[id="react-select-43-option-1"]').click();
       cy.get('[data-test="confirm"]').click();
+      cy.clearAllCookies();
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
+      cy.wait(2000);
+      cy.get('[data-test="64dee3ca-87c2-4c17-95ae-01afc8d4e01e"]')
+        .click()
+        .wait(1000)
+        .type("Fs0");
+      cy.get('[data-test="98e1eb98-87b2-4112-a3c9-6a23b29c3fea"]')
+        .click()
+        .wait(1000)
+        .type("M@" + randomKey);
+      cy.get(
+        '[data-test="98e1eb98-87b2-4112-a3c9-6a23b29c3fea-show-pass-icon"]'
+      ).click();
+      cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]')
+        .contains("ورود")
+        .click();
+      cy.request("https://riskmanagement-stage.otcsaba.ir/login").then(
+        ($response) => {
+          expect($response.status).to.eq(200);
+        }
+      );
     });
-
     it("Login after an account recovery process", () => {
       let randomKey = (Math.random() + 1).toString(36).substring(3);
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
