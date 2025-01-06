@@ -225,7 +225,8 @@ describe(
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
     });
 
-    it.only("Login after an account recovery process", () => {
+    it("Login after an account recovery process", () => {
+      let randomKey = (Math.random() + 1).toString(36).substring(3);
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
       cy.get(".text-textWhite > .flex > .text-lg").contains(
         "سامانه مدیریت ریسک"
@@ -254,13 +255,13 @@ describe(
         .contains("فراموشی رمز عبور")
         .click();
       cy.get('[data-test="81510a63-ae96-4a70-9e2f-d02b89bd4ab2"]').type(
-        "milad"
+        "arash"
       );
       cy.get('[data-test="14cd6af5-905e-4562-91f2-9bea461ae06d"]').type(
-        "saeednezhad"
+        "kabodian"
       );
       cy.get('[data-test="ef505948-ef5e-4ed8-992f-732900a1b76c"]').type(
-        "09393236862"
+        "09195060551"
       );
       cy.get('[data-test="0b6655f3-6408-45b0-80df-393d3396dfad"]').type(
         "لورم ایپسوم یا طرح‌نما (به انگلیسی: Lorem ipsum) به متنی آزمایشی و بی‌معنی در صنعت چاپ، صفحه‌آرایی و طراحی گرافیک گفته می‌شود. طراح گرافیک از این متن به عنوان عنصری از ترکیب بندی برای پر کردن صفحه و ارایه اولیه شکل ظاهری و کلی طرح سفارش گرفته شده استفاده می نماید، تا از نظر گرافیکی نشانگر چگونگی نوع و اندازه فونت و ظاهر متن باشد."
@@ -277,6 +278,33 @@ describe(
       cy.get('[data-test="f03797aa-0097-4bee-98c6-ec08a18512ad"]').click();
       cy.get('[aria-rowindex="5"] > [aria-colindex="5"]').rightclick();
       cy.get('[data-test="menu-item-1"]').click();
+      cy.get("input[name=firstName]").clear().type("arash");
+      cy.get("input[name=lastName]").clear().type("kabodian");
+      cy.get("input[name=userName]").clear().type(randomKey);
+      cy.get("input[name=mobileNumber]").clear().type("09195060551");
+      cy.get('[data-test="18919e73-b50f-452b-b659-b8defd4a595b"]').click();
+      cy.clearAllCookies();
+      cy.visit("https://riskmanagement-stage.otcsaba.ir");
+      cy.wait(2000);
+      cy.get('[data-test="64dee3ca-87c2-4c17-95ae-01afc8d4e01e"]')
+        .click()
+        .wait(1000)
+        .type(randomKey);
+      cy.get('[data-test="98e1eb98-87b2-4112-a3c9-6a23b29c3fea"]')
+        .click()
+        .wait(1000)
+        .type("Milad007@!");
+      cy.get(
+        '[data-test="98e1eb98-87b2-4112-a3c9-6a23b29c3fea-show-pass-icon"]'
+      ).click();
+      cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]')
+        .contains("ورود")
+        .click();
+      cy.request("https://riskmanagement-stage.otcsaba.ir/login").then(
+        ($response) => {
+          expect($response.status).to.eq(200);
+        }
+      );
     });
   }
 );
