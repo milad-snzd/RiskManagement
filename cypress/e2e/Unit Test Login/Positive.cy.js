@@ -162,7 +162,7 @@ describe(
         }
       );
     });
-    it.only("Login after a password reset to ensure the new password works", () => {
+    it("Login after a password reset to ensure the new password works", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
       cy.get(".text-textWhite > .flex > .text-lg").contains(
         "سامانه مدیریت ریسک"
@@ -204,6 +204,7 @@ describe(
       );
       cy.get('[data-test="4261a30a-e7d2-451f-9130-d2026f7299e1"]').click();
       cy.visit("https://riskmanagement-stage.otcsaba.ir/admin");
+      cy.wait(5000);
       cy.get('[data-test="4b3e33a4-1886-421f-9ec2-9f561028043a"]').type(
         "administrator"
       );
@@ -219,10 +220,12 @@ describe(
       cy.get('[data-test="18919e73-b50f-452b-b659-b8defd4a595b"]').click();
       cy.get('[data-test="07579af0-8fe9-4995-b01b-eb7bca1f1484"]').click();
       cy.get('.ag-row-first > [aria-colindex="7"]').click();
+      cy.get('[id="react-select-43-option-1"]').click();
+      cy.get('[data-test="confirm"]').click();
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
     });
 
-    it("Login after an account recovery process", () => {
+    it.only("Login after an account recovery process", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir");
       cy.get(".text-textWhite > .flex > .text-lg").contains(
         "سامانه مدیریت ریسک"
