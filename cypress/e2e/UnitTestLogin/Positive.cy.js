@@ -212,7 +212,7 @@ describe(
       cy.get('[data-test="4029ae30-6507-43ef-8e28-a632ae4cdc4b"]').type(
         "Admin@123"
       );
-      cy.get('[data-test="18919e73-b50f-452b-b659-b8defd4a595b"]').click();
+      cy.get('[data-test="18919e73-b50f-452b-b659-b8defd4a595b"]').click()
       cy.get('[data-test="f03797aa-0097-4bee-98c6-ec08a18512ad"]').click();
       cy.get('[aria-rowindex="3"] > [aria-colindex="3"]').rightclick();
       cy.get('[data-test="menu-item-3"]').click();
