@@ -1,4 +1,5 @@
 ///<reference types = "cypress"/>
+import { slowCypressDown } from 'cypress-slow-down'
 describe(
   "Full Home Page",
   {
@@ -421,3 +422,4 @@ describe(
     );
   }
 );
+slowCypressDown(1000)
