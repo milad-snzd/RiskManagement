@@ -232,7 +232,7 @@ describe(
         '[data-test="fund-card-86ff9674-8c7f-4a02-ad71-f209c0fa838e"]'
       ).click();
     });
-    it.only("Hover On Avesta Fund in Home Page", () => {
+    it("Hover On Avesta Fund in Home Page", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
       cy.location().should((loc) => {
         expect(loc.pathname.toString()).to.contain("login");
@@ -246,7 +246,7 @@ describe(
       cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]').click();
       cy.get(
         '[data-test="fund-card-30f32a7f-f571-4bff-bbb7-443eed60eacb"]'
-      ).invoke('show').trigger('mouseenter');
+      ).realHover();
     });
     it("Hover On Toseetaavon Fund in Home Page", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
@@ -262,7 +262,7 @@ describe(
       cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]').click();
       cy.get(
         '[data-test="fund-card-bdec8981-34d4-47a0-a9bc-c6bcde4f9fc5"]'
-      ).click();
+      ).realHover();
     });
     it("Hover On Petrosaba Fund in Home Page", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
@@ -278,9 +278,9 @@ describe(
       cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]').click();
       cy.get(
         '[data-test="fund-card-7f279c23-7fb4-4fb6-ac79-d998ab209075"]'
-      ).click();
+      ).realHover();
     });
-    it("Hover On Diba Fund in Home Page", () => {
+    it("Hover On Diba Fund in Home Page",{ scrollBehavior: false }, () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
       cy.location().should((loc) => {
         expect(loc.pathname.toString()).to.contain("login");
@@ -292,9 +292,7 @@ describe(
         "Admin@123"
       );
       cy.get('[data-test="559b63a0-af19-4aa1-9643-e333fafefe3d"]').click();
-      cy.get(
-        '[data-test="fund-card-86ff9674-8c7f-4a02-ad71-f209c0fa838e"]'
-      ).click();
+      cy.get('[data-test="fund-card-86ff9674-8c7f-4a02-ad71-f209c0fa838e"]').realHover()
     });
   }
 );
