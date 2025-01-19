@@ -7,7 +7,7 @@ describe(
     viewportWidth: 1440,
   },
   () => {
-    it("Header Logo Test", () => {
+    it("Header Home Page", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
       cy.location().should((loc) => {
         expect(loc.pathname.toString()).to.contain("login");
