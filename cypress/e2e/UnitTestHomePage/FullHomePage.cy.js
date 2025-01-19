@@ -256,7 +256,7 @@ describe(
         expect(loc.pathname.toString()).to.contain("details/7f279c23-7fb4-4fb6-ac79-d998ab209075");
       })
     });
-    it.only("Click On Diba Fund in Home Page", () => {
+    it("Click On Diba Fund in Home Page", () => {
       cy.visit("https://riskmanagement-stage.otcsaba.ir/");
       cy.location().should((loc) => {
         expect(loc.pathname.toString()).to.contain("login");
