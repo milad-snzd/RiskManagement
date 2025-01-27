@@ -5,7 +5,6 @@ describe(
   {
     viewportHeight: 810,
     viewportWidth: 1440,
-    watchForFileChangs: false,
   },
   () => {
     it("All Category HomePage", () => {
@@ -422,4 +421,4 @@ describe(
     );
   }
 );
-slowCypressDown(1000)
+slowCypressDown(500)
