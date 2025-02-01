@@ -33,7 +33,7 @@ describe(
         .invoke("removeAttr", "target")
         .click();
     });
-    it("Fund Introduction Card List Of Symbols In Stock", () => {
+    it("Fund Introduction Card List Of Symbols", () => {
       Cypress.on("uncaught:exception", (err) => {
         if (
           err.message.includes(
